@@ -17,6 +17,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: listar ficheros
+      run: ls -la
+
     - name: Iniciar aplicacion
       run: |
         docker compose -f develop up -d --build
