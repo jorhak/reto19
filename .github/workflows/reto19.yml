@@ -31,7 +31,7 @@ jobs:
     
     - name: estado de hospital
       run: |
-        docker compose -f develop.yml logs hospital-frontend
+        docker compose -f develop.yml logs frontend
 
     - name: estado de microservicio1
       run: |
@@ -39,4 +39,4 @@ jobs:
     
     - name: estado de ms_bi
       run: |
-        docker compose -f develop.yml logs ms_bi
+        docker compose -f develop.yml logs app
