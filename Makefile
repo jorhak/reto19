@@ -25,3 +25,9 @@ delete-image: ## Eliminar imágenes de proyectos
 		docker rmi -f $(PROJECTS); \
 	fi
 	@
+
+eliminar-imagenes: ## Eliminar imágenes relacionadas con reto19
+	docker rmi $(shell docker images | grep reto19 | awk '{print $$3}') || echo "No hay contenedores detenidos para eliminar."
+
+down-reto: ## Derribar todos los entornos relacionados con reto19
+	docker rm -f $(shell docker ps -q) || echo "No hay contenedores en ejecución para derribar."
