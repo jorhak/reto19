@@ -1,0 +1,108 @@
+services:
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: microservicio2
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_AUTHENTICATION_DATABASE: admin
+    ports:
+    - 27017:27017
+    volumes:
+    - mongodb_data:/data/db
+    networks:
+    - app-microservicio
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_SERVER: mongodb
+    ports:
+    - 8081:8081
+    depends_on:
+    - mongodb
+    networks:
+    - app-microservicio
+
+  microservicio1:
+    build:
+      context: ./microservicio1
+      dockerfile: Dockerfile
+    container_name: microservicio1
+    restart: always
+    environment:
+      MONGODB_URI: 'mongodb://mongodb:27017/microservicio2?authSource=admin'
+      MONGODB_USER: admin
+      MONGODB_PASSWORD: password
+    ports:
+    - 3000:3000
+    depends_on:
+    - mongodb
+    networks:
+    - app-microservicio
+
+  app:
+    build:
+      context: ./ms_bi
+      dockerfile: Dockerfile
+    container_name: ms_bi
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=db_hospitalbi
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      - db
+    networks:
+    - app-msbi 
+
+  db :
+    image: postgres
+    container_name: dbpostgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db_hospitalbi
+    volumes:
+      - datapg:/var/lib/postgresql/data
+      - ./db_hospitalbi.sql:/docker-entrypoint-initdb.d/db_hospitalbi.sql
+    ports:
+      - 5432:5432
+    networks:
+    - app-msbi
+
+  frontend:
+    build:
+      context: ./hospital
+      dockerfile: Dockerfile
+    container_name: hopsital-frontend
+    restart: always
+    ports:
+      - 8090:80
+    depends_on:
+      - microservicio1
+      - app
+
+networks:
+  app-microservicio:
+    driver: bridge
+    name: net-microservicio
+  app-msbi:
+    driver: bridge
+    name: net-msbi
+
+volumes:
+  mongodb_data:
+  datapg:

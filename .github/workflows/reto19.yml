@@ -1,0 +1,39 @@
+name: Build Docker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  levantar-app:
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Iniciar aplicacion
+      run: |
+        docker compose -f develop up -d --build
+    
+    - name: Verificar containers
+      run: |
+        sleep 10
+        docker compose -f develop ps
+    
+    - name: estado de hospital
+      run: |
+        docker compose -f develop log hospital-frontend
+
+    - name: estado de microservicio1
+      run: |
+        docker compose -f develop log microservicio1
+    
+    - name: estado de ms_bi
+      run |
+        docker compose -f develop log ms_bi
