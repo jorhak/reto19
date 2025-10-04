@@ -1,4 +1,9 @@
-hospital/
-microservicio1/
-ms_bi/
 actions-runner/
+node_modules/
+uploads/
+*.log
+*.tmp
+*.env
+imagenes/
+package-lock.json
+

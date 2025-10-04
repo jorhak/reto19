@@ -1,0 +1,99 @@
+<!-- [ Layout sidenav ] Start -->
+<div id="layout-sidenav" class="layout-sidenav sidenav sidenav-vertical bg-white logo-dark">
+    <!-- Brand demo (see assets/css/demo/demo.css) -->
+    <div class="app-brand demo">
+        <span class="app-brand-logo demo">
+            <img src="assets/img/logo.png" alt="Brand Logo" class="img-fluid" />
+        </span>
+        <a href="home.php" class="app-brand-text demo sidenav-text font-weight-normal ml-2">Hospital</a>
+        <a href="javascript:" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
+            <i class="ion ion-md-menu align-middle"></i>
+        </a>
+    </div>
+    <div class="sidenav-divider mt-0"></div>
+
+    <!-- Links -->
+    <?php if($_SESSION['tipo'] == 'Doctor'){?>
+    <ul class="sidenav-inner py-1">
+        <li class="sidenav-item active">
+            <a href="dashboard.php" class="sidenav-link">
+                <i class="sidenav-icon feather icon-pie-chart"></i>
+                <div>Dashboards</div>
+            </a>
+        </li>
+        <!-- Dashboards -->
+        <li class="sidenav-header small font-weight-semibold">Doctor ms1</li>
+        <li class="sidenav-item">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="sidenav-icon feather icon-users"></i>
+                <div>Consultas</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item">
+                    <a href="mis-consultas.php" class="sidenav-link">
+                        <div>Consultas del dia</div>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a href="modificar-consulta.php" class="sidenav-link">
+                        <div>Buscar Consulta</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="sidenav-item">
+            <a href="medicamentos.php" class="sidenav-link">
+                <i class="sidenav-icon feather icon-thermometer"></i>
+                <div>Medicamentos</div>
+            </a>
+        </li>
+
+        <li class="sidenav-item">
+            <a href="modificar-internacion.php" class="sidenav-link">
+                <i class="sidenav-icon feather icon-activity"></i>
+                <div>Pacientes Internados</div>
+            </a>
+        </li>
+
+        <!-- <li class="sidenav-item">
+            <a href="javascript:" class="sidenav-link sidenav-toggle">
+                <i class="sidenav-icon feather icon-smartphone"></i>
+                <div>Salas</div>
+            </a>
+            <ul class="sidenav-menu">
+                <li class="sidenav-item">
+                    <a href="registrar-sala.php" class="sidenav-link">
+                        <div>Registrar Sala</div>
+                    </a>
+                </li>
+                <li class="sidenav-item">
+                    <a href="modificar-sala.php" class="sidenav-link">
+                        <div>Modificar Sala</div>
+                    </a>
+                </li>
+            </ul>
+        </li> -->
+        <!-- Forms & Tables -->
+        <!-- <li class="sidenav-divider mb-1"></li>
+        <li class="sidenav-header small font-weight-semibold">Pagos ms3</li>
+        <li class="sidenav-item">
+            <a href="pagos.php" class="sidenav-link">
+                <i class="sidenav-icon feather icon-shopping-cart"></i>
+                <div>Historial de Pagos</div>
+            </a>
+        </li> -->
+        <?php }else{ ?>
+        <!-- Layouts -->
+        <li class="sidenav-divider mb-1"></li>
+        <li class="sidenav-header small font-weight-semibold">Paciente ms2</li>
+        <li class="sidenav-item">
+            <a href="ficha-medica.php" class="sidenav-link">
+                <i class="sidenav-icon feather icon-user-plus"></i>
+                <div>Ficha Medica</div>
+            </a>
+        </li>
+        <?php };?>
+    </ul>
+</div>
+<!-- [ Layout sidenav ] End -->
