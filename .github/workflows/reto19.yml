@@ -22,7 +22,7 @@ jobs:
 
     - name: Iniciar aplicacion
       run: |
-        docker compose -f develop up -d --build
+        docker compose -f develop.yml up -d --build
     
     - name: Verificar containers
       run: |
@@ -31,12 +31,12 @@ jobs:
     
     - name: estado de hospital
       run: |
-        docker compose -f develop log hospital-frontend
+        docker compose -f develop.yml log hospital-frontend
 
     - name: estado de microservicio1
       run: |
-        docker compose -f develop log microservicio1
+        docker compose -f develop.yml log microservicio1
     
     - name: estado de ms_bi
       run: |
-        docker compose -f develop log ms_bi
+        docker compose -f develop.yml log ms_bi
