@@ -4,6 +4,5 @@ uploads/
 *.log
 *.tmp
 *.env
-imagenes/
 package-lock.json
 
