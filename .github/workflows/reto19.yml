@@ -27,7 +27,7 @@ jobs:
     - name: Verificar containers
       run: |
         sleep 10
-        docker compose -f develop ps
+        docker compose -f develop.yml ps
     
     - name: estado de hospital
       run: |
