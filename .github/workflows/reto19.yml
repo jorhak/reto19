@@ -35,5 +35,5 @@ jobs:
         docker compose -f develop log microservicio1
     
     - name: estado de ms_bi
-      run |
+      run: |
         docker compose -f develop log ms_bi
