@@ -87,7 +87,7 @@ services:
     build:
       context: ./hospital
       dockerfile: Dockerfile
-    container_name: hopsital-frontend
+    container_name: hospital-frontend
     restart: always
     ports:
       - 8090:80
